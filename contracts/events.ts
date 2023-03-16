@@ -26,8 +26,9 @@ declare module '@ioc:Adonis/Core/Event' {
   |
   */
   interface EventsList {
-    'new:ingrediente': Ingrediente
-
+    'new:ingrediente': Ingrediente,
+    'update:ingrediente': Ingrediente,
+    'delete:ingrediente': Ingrediente
     //
   }
 }

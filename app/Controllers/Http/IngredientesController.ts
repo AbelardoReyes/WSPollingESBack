@@ -7,6 +7,7 @@ import Database from "@ioc:Adonis/Lucid/Database";
 export default class IngredientesController {
   public async index ({ request, response }: HttpContextContract) {
     const ingredientes = await Ingrediente.all()
+    Event.emit('open:stream',1)
     response.send(ingredientes)
   }
   public async store ({ request, response }: HttpContextContract) {
@@ -40,6 +41,7 @@ export default class IngredientesController {
         data: ingrediente,
         error: false
       }
+
       response.send(respuesta)
     }
   }
@@ -93,7 +95,11 @@ export default class IngredientesController {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
       'Connection': 'keep-alive',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
     })
+    Event.on('open:stream', (id) => {
+      stream.write(`se abrio el stream`)
+    });
     Event.on('new:ingrediente', (ingrediente) => {
       stream.write(`se agrego un ingrediente`)
     });

@@ -20,6 +20,7 @@ import Server from '@ioc:Adonis/Core/Server'
 | are defined for every HTTP requests.
 |
 */
+
 Server.middleware.register([
   () => import('@ioc:Adonis/Core/BodyParser'),
 ])
